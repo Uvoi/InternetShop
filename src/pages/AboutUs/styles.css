@@ -1,0 +1,31 @@
+#AboutUs 
+{
+    margin-top: -8vh;
+}
+
+#AboutUs h1 {
+    font-size: 30px;
+    line-height: 45px;
+}
+
+.changingWord {
+    position: relative;
+    z-index: 1;
+    cursor: help;
+}
+
+.changingWord::before {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: -3%;
+    right: -3%;
+    bottom: 25%;
+    background-color: rgba(243, 43, 226, 0.6);
+    z-index: -1;
+}
+
+#welcomeAU
+{
+    text-align:center;
+}

@@ -1,0 +1,76 @@
+.OrderItem
+{
+    border-radius: 15px;
+    padding: 1vh 0;
+}
+
+.orderItemHeader>div
+{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.orderItemHeader h3
+{
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.orderItemHeader h4
+{
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.orderItemHeader>div>div
+{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.orderItemHeader>div>div h4
+{
+    text-align: right;
+    width: 100px;
+}
+
+.orderItemHeader>div>div h4 button
+{
+    padding: 5px 9px;
+}
+
+.orderItemData
+{
+    margin: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.orderItemDeliveryData
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delAddressOI
+{
+    text-align: left;
+}
+
+.delDateOI
+{
+    text-align: right;
+}
+
+.orderItemDeliveryData h4
+{
+    font-size: 18px;
+    font-weight: normal;
+}

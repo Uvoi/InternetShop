@@ -1,0 +1,97 @@
+Footer
+{ 
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    width: 96%;
+    padding: 2vh 2% 0 2%;
+    gap: 2vh;
+    height: 55vh;
+}
+
+#payingF
+{
+    display: flex;
+    justify-content:space-evenly;
+    list-style-type: none;
+}
+
+#Footer h2
+{
+    text-align: left;
+    margin: 0;
+    font-size: 30px;
+    color: white;
+}   
+
+#contact_aboutF
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1vw;
+}
+
+
+#contactsF
+{
+    display: flex;
+    flex-direction: column;
+    width: 16%;
+    align-items: start;
+    justify-content: center;
+    gap: 2.5vh;
+}
+
+#contactIconsF
+{
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    gap: 1vw;
+}
+
+#contactIconsF img
+{
+    height: 6vh;
+}
+
+#contactsF p
+{
+    color: white;
+    margin: 0;
+}
+
+#contactsF button
+{
+    width: 60%;
+}
+
+#contactsF button
+{
+    font-size: 14px;
+    padding: 5px 6px;
+    width: 70%;
+}
+
+#contactsF a
+{
+    text-decoration: none;
+}
+
+#aboutUsF
+{
+    display: flex;
+    text-align: justify;
+    width: 84%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#logofF
+{
+    width: 100%;
+    height: 100%;
+}

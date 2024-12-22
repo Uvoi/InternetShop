@@ -1,0 +1,104 @@
+#Help
+{
+    display: flex;
+    justify-content: center;
+    gap: 8vw;
+}
+#help
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 5vh;
+}
+#help input, textarea
+{
+    padding: 2px 5px;
+    border-bottom: 3px solid rgb(68, 32, 77);
+    font-size: 25px;
+    width: 30vw;
+    background-color: #ffffff00;
+}
+
+#help button
+{
+    width: 150px;   
+    
+}
+
+#help textarea
+{
+    resize: none;
+    height: 30vh;
+    overflow: hidden;
+    overflow-y: auto;
+    border-bottom: none;
+    border: 3px dashed rgb(68, 32, 77);
+}
+
+#contactDataHelpWrapper
+{
+    height: 100%;
+    padding: 30px;
+}
+
+#contactDataHelp img
+{
+    height: 8vh;
+}
+
+#contactDataHelp
+{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 5vh;
+    background-color: #1a0121;
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+
+}
+
+#contactDataHelp::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a0121;
+    filter: blur(20px);
+    z-index: -2;
+  }
+
+#sendButtonHelp
+{
+    text-align: right;
+}
+
+#contactDataImgsHelp
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+    font-size: 30px;
+}
+#contactDataImgsHelp span
+{
+    margin: 0 30px;
+}
+#contactDataHelp h1
+{
+    color: white;
+    align-self: center;
+    margin: 0 0 5vh 0;
+}
+
+#contactDataHelp p
+{
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+}

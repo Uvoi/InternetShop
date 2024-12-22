@@ -1,0 +1,66 @@
+#Basket {
+    width: 72%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#basket
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* gap: 20px; */
+}
+
+#basket h3
+{
+    font-size: clamp(16px, 1.3vw, 24px);
+}
+
+#buttonsBas
+{
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#buttonsBas button, #buttonsBas a
+{
+    font-size: 2.5vmin;
+    text-decoration: none;
+}
+
+#buttonsBas>div
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#buttonsBas>div h2
+{
+    font-size: 4vmin;
+    white-space: nowrap;
+}
+
+#basketProducts
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#emptyBasket
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#emptyBasket a{
+    text-decoration: none;
+}
+
+
+
