@@ -175,6 +175,38 @@ Base.metadata.create_all(bind=engine)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
+
+def get_measurement_names():
+    measurements = {
+        "male": {
+            "chest": "Обхват груди",
+            "waist": "Обхват талии",
+            "hips": "Обхват бедер",
+            "shoulder_width": "Ширина плеч",
+            "chest_width": "Ширина грудной клетки",
+            "seat_height": "Длина сидения",
+            "arm_length": "Длина руки",
+            "wrist_circumference": "Обхват запястья",
+            "inseam_length": "Шаговая длина"
+        },
+        "female": {
+            "chest": "Обхват груди",
+            "waist": "Обхват талии",
+            "hips": "Обхват бедер",
+            "shoulder_width": "Ширина плеч",
+            "underbust_circumference": "Обхват под грудью",
+            "bust_height": "Высота груди",
+            "skirt_length": "Длина юбки от талии",
+            "arm_length": "Длина руки",
+            "wrist_circumference": "Обхват запястья",
+            "inseam_length": "Шаговая длина"
+        }
+    }
+    return measurements
+
+
+
+
 # def printCustomers():
 #     with SessionLocal() as session:
 #         customers = session.query(Customer).all()
