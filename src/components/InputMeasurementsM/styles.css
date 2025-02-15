@@ -1,0 +1,59 @@
+.InputMeasurementsM
+{
+    position: absolute;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    height: 75vh;
+    box-shadow: 24;
+    padding: 2%;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 30px;
+}
+
+.InputMeasurementsM form
+{
+    display: flex;    
+    flex-direction: column;
+    gap: 10px;
+}
+
+.InputMeasurementsM .InputMeasurementsMTF input
+{
+    padding: 6px;
+}
+
+.InputMeasurementsM .InputMeasurementsMTF label[data-shrink="false"]
+{
+    -webkit-transform: translate(6px, 6px) scale(1);
+    -moz-transform: translate(6px, 6px) scale(1);
+    -ms-transform: translate(6px, 6px) scale(1);
+    transform: translate(6px, 6px) scale(1);
+}
+
+.InputMeasurementsMTF
+{
+    width:100%;
+}
+
+.InputMeasurementsMInputs
+{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.InputMeasurementsMInputs > button
+{
+    padding: 4px;
+}
+
+.InputMeasurementsMInputs > button > svg
+{
+    font-size: 24px;
+}
