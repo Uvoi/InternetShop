@@ -1,64 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css';
-import { Input, Button } from '@mui/material';
+import { Input, Button, RadioGroup, Radio, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import { useNotification } from '../Notification/Notification';
-import { addNewProduct } from '../../functions/product';
+import { addNewProduct, getMeasurements } from '../../functions/product';
+import { useTheme } from '../../themes/ThemeProvider';
 
-interface Composition {
-  Fe: string;
-  Ni: string;
-  S: string;
-  Mg: string;
-  Si: string;
-  Al: string;
-  Ca: string;
-  O: string;
-}
 
 interface FormData {
-  id: string;
   name: string;
   description: string;
   price: string;
-  weight: string;
-  diameter: string;
+  category: string;
   imgLink: string;
-  composition: Composition;
+  composition: string;
 }
 
 interface Errors {
   name?: boolean;
   description?: boolean;
   price?: boolean;
-  weight?: boolean;
-  diameter?: boolean;
+  category?: boolean;
+  imglink?: boolean;
   composition?: boolean;
+  gender?: boolean,  
 }
 
 const AddNewProduct: React.FC = () => {
-  const showNotification = useNotification();
+
+  const { theme } = useTheme();
+  const showNotification = useNotification();  
+
+
   const [formData, setFormData] = useState<FormData>({
-    id: '',
     name: '',
     description: '',
     price: '',
-    weight: '',
-    diameter: '',
+    category: '',
     imgLink: '',
-    composition: {
-      Fe: '',
-      Ni: '',
-      S: '',
-      Mg: '',
-      Si: '',
-      Al: '',
-      Ca: '',
-      O: '',
-    },
+    composition: '',
   });
 
   const [errors, setErrors] = useState<Errors>({});
-  const [remains, setRemains] = useState<number>(0);
+  const [gender, setGender] = useState('');
+  const [measurements, setMeasurements] = useState<{ male: Record<string, string>, female: Record<string, string> }>({
+    male: {},
+    female: {},
+  });
+
+  const [selectedMeasurements, setSelectedMeasurements] = useState<string[]>([]);
+
+  const handleChangeMeasurements = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSelectedMeasurements((prev) =>
+      prev.includes(value) ? prev.filter((m) => m !== value) : [...prev, value]
+    );
+  };
+
 
   const validateForm = (): boolean => {
     const newErrors: Errors = {};
@@ -66,23 +63,10 @@ const AddNewProduct: React.FC = () => {
     if (!formData.name) newErrors.name = true;
     if (!formData.description) newErrors.description = true;
     if (!formData.price) newErrors.price = true;
-    if (!formData.weight) newErrors.weight = true;
-    if (!formData.diameter) newErrors.diameter = true;
-
-    const compositionValues = Object.values(formData.composition).map((value) =>
-      Number(value || 0)
-    );
-    const compositionSum = compositionValues.reduce((acc, val) => acc + val, 0);
-    setRemains(100 - compositionSum);
-
-    if (compositionSum !== 100) {
-      newErrors.composition = true;
-      showNotification!(
-        `Сумма элементов должна быть 100%. Осталось распределить ${100 - compositionSum}%`,
-        'red',
-        3500
-      );
-    }
+    if (!formData.category) newErrors.category = true;
+    if (!formData.imgLink) newErrors.imglink = true;
+    if (!formData.composition) newErrors.composition = true;
+    if (!gender) newErrors.gender = true;
 
     setErrors(newErrors);
 
@@ -97,30 +81,27 @@ const AddNewProduct: React.FC = () => {
     }));
   };
 
-  const handleCompositionChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      composition: {
-        ...prevData.composition,
-        [name]: value === '' ? '0' : Math.max(0, Number(value)).toString(),
-      },
-    }));
+  const handleChangeGender = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedGender = (event.target as HTMLInputElement).value;
+    setGender(selectedGender);
+    setSelectedMeasurements([]);
+    setErrors((prev)=>({...prev, gender:false}))
   };
+  
 
   const sendToServ = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     if (!validateForm()) return;
 
     const payload = {
-      id: formData.id ? Number(formData.id) : 0,
       name: formData.name,
       description: formData.description,
-      price: parseFloat(formData.price),
-      weight: parseFloat(formData.weight),
-      diameter: parseFloat(formData.diameter),
+      price: parseInt(formData.price),
+      category: formData.category,
       imglink: formData.imgLink,
-      composition: Object.values(formData.composition).map(value => value || '0').join(',')
+      composition: formData.composition,
+      gender: gender,
+      required_measurements: selectedMeasurements
     };
     
     const success = await addNewProduct(payload);    
@@ -128,80 +109,149 @@ const AddNewProduct: React.FC = () => {
       showNotification!('Продукт успешно добавлен', 'green');
     }
   };
+  
+  const productFieldBorder = theme.palette.primary.ultra;
+  const genderStyle = {
+    color: errors.gender ? 'red' : theme.palette.text.ultra
+  };
+  const genderMeasuresStyle = {
+    color: theme.palette.text.primary 
+  };
+  const genderMeasuresStyleDisabled = {
+    color: theme.palette.text.disabled
+  };
+
+
+
+  useEffect(() => {
+    async function fetchMeasurements() {
+      try {
+        const data = await getMeasurements();
+        setMeasurements(data);
+      } catch (error) {
+        console.error("Ошибка при получении мерок:", error);
+      }
+    }
+    fetchMeasurements();
+  }, []);
+
 
   return (
-    <form id="AddToDB">
-      <Input
-        type="number"
-        name="id"
-        placeholder="ID"
-        value={formData.id}
-        onChange={handleInputChange}
-      />
-      <Input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={formData.name}
-        onChange={handleInputChange}
-        style={{ border: errors.name ? '1px solid red' : '1px solid #ccc' }}
-      />
-      <Input
-        type="text"
-        name="description"
-        placeholder="Description"
-        value={formData.description}
-        onChange={handleInputChange}
-        style={{ border: errors.description ? '1px solid red' : '1px solid #ccc' }}
-      />
-      <Input
-        type="number"
-        name="price"
-        placeholder="Price"
-        value={formData.price}
-        onChange={handleInputChange}
-        style={{ border: errors.price ? '1px solid red' : '1px solid #ccc' }}
-      />
-      <Input
-        type="number"
-        name="weight"
-        placeholder="Weight"
-        value={formData.weight}
-        onChange={handleInputChange}
-        style={{ border: errors.weight ? '1px solid red' : '1px solid #ccc' }}
-      />
-      <Input
-        type="number"
-        name="diameter"
-        placeholder="Diameter"
-        value={formData.diameter}
-        onChange={handleInputChange}
-        style={{ border: errors.diameter ? '1px solid red' : '1px solid #ccc' }}
-      />
-      <Input
-        type="text"
-        name="imgLink"
-        placeholder="imgLink"
-        value={formData.imgLink}
-        onChange={handleInputChange}
-      />
-      <div id="composition">
-        {Object.keys(formData.composition).map((key) => (
+    <div className='AddNewProduct'>
+      <form className="AddToDB">
+        <div className="DataANP">
           <Input
-            key={key}
-            type="number"
-            name={key}
-            placeholder={key}
-            value={formData.composition[key as keyof Composition]}
-            onChange={handleCompositionChange}
-            style={{ border: errors.composition ? '1px solid red' : '1px solid #ccc' }}
+            type="text"
+            name="name"
+            placeholder="Title*"
+            value={formData.name}
+            onChange={handleInputChange}
+            style={{ border: errors.name ? '1px solid red' : '1px solid ' + productFieldBorder}}
           />
-        ))}
-      </div>
+          <Input
+            type="text"
+            name="description"
+            placeholder="Description*"
+            value={formData.description}
+            onChange={handleInputChange}
+            style={{ border: errors.description ? '1px solid red' : '1px solid ' + productFieldBorder}}
+          />
+          <Input
+            type="number"
+            name="price"
+            placeholder="Price*"
+            value={formData.price}
+            onChange={handleInputChange}
+            style={{ border: errors.price ? '1px solid red' : '1px solid ' + productFieldBorder}}
+          />
+          <Input
+            type="text"
+            name="category"
+            placeholder="Category*"
+            value={formData.category}
+            onChange={handleInputChange}
+            style={{ border: errors.category ? '1px solid red' : '1px solid ' + productFieldBorder}}
+          />
+          <Input
+            type="text"
+            name="imgLink"
+            placeholder="Image link*"
+            value={formData.imgLink}
+            onChange={handleInputChange}
+            style={{ border: errors.imglink ? '1px solid red' : '1px solid ' + productFieldBorder}}
+          />
+          <Input
+            type="text"
+            name="composition"
+            placeholder="Composition*"
+            value={formData.composition}
+            onChange={handleInputChange}
+            style={{ border: errors.composition ? '1px solid red' : '1px solid ' + productFieldBorder}}
+          />
+        </div>
+          <RadioGroup className="GenderANP"
+            aria-labelledby="demo-controlled-radio-buttons-group"
+            name="controlled-radio-buttons-group"
+            value={gender}
+            onChange={handleChangeGender}
+          >
+            <div>
+              <label>
+                <Radio value="male"/>
+                <p style={genderStyle}>Male</p>
+              </label>
+              <label
+              style={{ color: errors.gender ? 'red' : 'inherit' }}>
+                <Radio value="unisex"/>
+                <p style={genderStyle}>Unisex</p>
+              </label>
+                <FormGroup className="maleMeasures">
+                  {Object.entries(measurements.male).map(([key, value]) => (
+                    <FormControlLabel
+                      key={key}
+                      control={
+                        <Checkbox
+                          value={key}
+                          checked={["male", "unisex"].includes(gender) && selectedMeasurements.includes(key)}
+                          onChange={handleChangeMeasurements}
+                          disabled={!["male", "unisex"].includes(gender)}
+                        />
+                      }
+                      label={<p style={["male", "unisex"].includes(gender)?genderMeasuresStyle:genderMeasuresStyleDisabled}>{value}</p>}
+                    />
+                  ))}
+                </FormGroup>
+            </div>
+
+            <div>
+              <label>
+                <Radio value="female"/>
+                <p style={genderStyle}>Female</p>
+              </label>
+                <FormGroup className="femaleMeasures">
+                  {Object.entries(measurements.female).map(([key, value]) => (
+                    <FormControlLabel
+                      key={key}
+                      control={
+                        <Checkbox
+                          value={key}
+                          checked={gender === "female" && selectedMeasurements.includes(key)}
+                          onChange={handleChangeMeasurements}
+                          disabled={gender !== "female"}
+                        />
+                      }
+                      label={<p style={gender == "female"?genderMeasuresStyle:genderMeasuresStyleDisabled}>{value}</p>}
+                    />
+                  ))}
+                </FormGroup>
+            </div>
+
+          </RadioGroup>
+      </form>
       <Button variant="contained" type="submit" onClick={sendToServ}>
         Add
       </Button>
-    </form>
+    </div>
   );
 };
 

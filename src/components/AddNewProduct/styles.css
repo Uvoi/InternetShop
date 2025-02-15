@@ -1,35 +1,48 @@
-#AddToDB
+.AddNewProduct
 {
     height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.AddToDB
+{
+    display: flex;
+    align-items:start;
+    gap: 30px;
+}
+
+.DataANP
+{
     display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
 }
 
-#AddToDB input
+.AddToDB .DataANP input
 {
-    border: 1px solid rgb(112, 112, 112);
     width: 30vw;
     padding: 0 10px;
     height: 35px;
 }
 
-#composition
-{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-}
-
-#composition input
-{
-    width: 5vw;
-}
-
-#AddToDB button
+.AddNewProduct button
 {
     margin-top: 20px;
     width: 10vw;
+}
+
+.GenderANP
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.GenderANP label
+{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
