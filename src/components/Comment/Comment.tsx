@@ -20,10 +20,10 @@ const Comment:React.FC<CommentProps> = ({user, customerId, dateTime, photo, chil
     return(
         <div id='Comment'>
             <div id='comment'>
-                <div id="picAndUsernameCom" style={{color: theme.palette.text.ultra}}>
+                <div id="picAndUsernameCom">
                     <Link to={'/user?id='+customerId}>
                         <img src={photo?photo:userPic} alt="" />
-                        {user}
+                        <span style={{color: theme.palette.text.primary}}>{user}</span>
                     </Link>
                 </div>
                 <div id="dataCom">
