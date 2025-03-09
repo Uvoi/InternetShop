@@ -5,8 +5,6 @@ import { Button } from '@mui/material';
 import './styles.css'
 import visaLogo from '../../images/visa.webp'
 import mastercardLogo from '../../images/mastercard.webp'
-import bitcoinLogo from '../../images/bitcoin.webp'
-import ethereumLogo from '../../images/ethereum.webp'
 import qiwiLogo from '../../images/qiwi.webp'
 import paypalLogo from '../../images/paypal.webp'
 import telegramLogo from '../../images/telegram.webp'
@@ -38,18 +36,16 @@ const Footer = ()=>
                     <ul id="payingF">
                         <li><img src={visaLogo} alt=""/></li>
                         <li><img src={mastercardLogo} alt=""/></li>
-                        <li><img src={bitcoinLogo} alt=""/></li>
-                        <li><img src={ethereumLogo} alt=""/></li>
                         <li><img src={qiwiLogo} alt=""/></li>
                         <li><img src={paypalLogo} alt=""/></li>
                     </ul>
                     <span style={{color: theme.palette.text.secondary}}>
-                        www.asteroid.shop, owned and operated by Baobab Media Inc. (registration number 3301) with its registered office at Ratmanov Island, Chukotka District and legal address at Bolshoy Lyakhovsky Island in the Bulunsky Ulus district of the Republic of Sakha, welcomes you to our online store. At Asteroid Media, we are dedicated to providing our customers with a wide selection of high-quality space objects that meet their individual needs and interests. Our goal is to provide a one-stop shop for all their space exploration and collection needs.The terms and conditions of your participation in the Purchases are governed by the laws of Atlantis. The terms relating to payment collection and transactions, on the other hand, are governed by the applicable laws of Asia and Oceania. You agree that, unless otherwise specified, Purchases take place in Atlantean territory and your participation therein takes place within the aforementioned territory as well. Any contractual arrangements between you and our company shall be considered completed and executed in Atlantis, at the registered office. The Parties agree that any disputes, contradictions, or claims arising out of, or in connection with, these Terms and Conditions as well as any violations, termination, or invalidity thereof shall be subject to the exclusive jurisdiction of the courts in Atlantis. However, claims arising from payment-related transactions shall be submitted to the courts of either Atlantis or the courts of East Asia or Oceania, depending on which applies.
+                    www.clothes.shop, a company owned and operated by Clothes Media Inc. (registration number 3301), registered on Ratmanov Island, Chukotka District, and whose legal address is Bolshoy Lyakhovsky Island in the Bulunsky district of the Sakha Republic, welcomes you to our online store. Clothes Media Company strives to provide our clients with a wide range of high-quality and stylish clothes that meet their individual needs and interests. Our goal is to provide a one-stop service to meet all their clothing and fashion needs.The terms of your participation in the procurement are governed by the laws of Atlantis. On the other hand, the terms and conditions regarding the collection of payments and transactions are governed by the applicable laws of Asia and Oceania. You agree that, unless otherwise stated, purchases are made on the territory of Atlantis, and your participation in them is also carried out on the aforementioned territory. Any contractual agreements between you and our company are considered concluded in Atlantis, according to the registered office. The Parties agree that any disputes, contradictions or claims arising out of or in connection with these Terms and Conditions, as well as any violations, termination or invalidity thereof, are subject to the exclusive jurisdiction of the courts of Atlantis. However, claims arising in connection with payment transactions must be filed either in the courts of Atlantis, or in the courts of East Asia or Oceania, whichever is applicable.
                     </span>
                 </div>
             </div>
 
-            <span id="rights" style={{color: theme.palette.text.ultra}}>© Baobab, 1988-2024. Все права защищены. </span>
+            <span id="rights" style={{color: theme.palette.text.ultra}}>© Clothes, 1988-2024. Все права защищены. </span>
         
         </footer>
     );
